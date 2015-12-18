@@ -1,0 +1,33 @@
+{
+    "name": "happyr/auto-fallback-translation-bundle",
+    "type": "symfony-bundle",
+    "description": "Make sure to use a translation service like Bing or Google to translate your missing messages",
+    "keywords": [],
+    "homepage": "http://developer.happyr.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobias Nyholm",
+            "email": "tobias@happyr.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "symfony/symfony":"^2.7|^3.0",
+        "sensio/framework-extra-bundle": "^3.0.7",
+        "php-http/client-implementation": "1.0",
+        "php-http/discovery": "~0.1",
+        "cache/taggable-cache":        "^0.1",
+        "psr/cache-implementation":    "~1.0"
+    },
+    "require-dev": {
+        "php-http/guzzle5-adapter": "dev-master",
+        "php-http/httplug": "v1.0.0-beta"
+    },
+    "autoload": {
+        "psr-4": {
+            "Happyr\\AutoFallbackTranslationBundle\\": "src/"
+        }
+    }
+}
+
