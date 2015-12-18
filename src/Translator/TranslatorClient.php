@@ -6,6 +6,7 @@ use Http\Client\HttpClient;
 use Http\Client\Plugin\CachePlugin;
 use Http\Client\Plugin\PluginClient;
 use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\StreamFactoryDiscovery;
 use Psr\Cache\CacheItemPoolInterface;
 
 abstract class TranslatorClient
@@ -26,7 +27,7 @@ abstract class TranslatorClient
     protected function getHttpClient()
     {
         if ($this->httpClient === null) {
-            $this->httpClient = new PluginClient(HttpClientDiscovery::find(), [new CachePlugin($this->cachePool, [
+            $this->httpClient = new PluginClient(HttpClientDiscovery::find(), [new CachePlugin($this->cachePool, StreamFactoryDiscovery::find(), [
                 'respect_cache_headers'=>false,
                 'default_ttl'=>604800,
             ])]);
