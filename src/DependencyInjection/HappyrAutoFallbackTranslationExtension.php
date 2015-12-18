@@ -40,7 +40,7 @@ class HappyrAutoFallbackTranslationExtension extends Extension
         $container->findDefinition('happyr.translation.auto_fallback_translator')
             ->replaceArgument(0, $config['default_locale'])
             ->replaceArgument(2, $translatorServiceDef)
-            ->setDecoratedService('translator');
+            ->setDecoratedService('translator', null, 10);
     }
 
 }
