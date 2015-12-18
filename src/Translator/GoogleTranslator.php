@@ -38,10 +38,15 @@ class GoogleTranslator extends TranslatorClient implements TranslatorClientInter
         $response = $this->getHttpClient()->sendRequest($request);
 
         if ($response->getStatusCode() !== 200) {
-            return;
+            return $string;
         }
 
         $data = json_decode($response->getBody()->__toString(), true);
+
+        if (!is_array($data)) {
+            return $string;
+        }
+
         foreach ($data['data']['translations'] as $translaton) {
             return $translaton['translatedText'];
         }
