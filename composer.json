@@ -23,6 +23,9 @@
         "php-http/guzzle5-adapter": "dev-master",
         "php-http/httplug": "v1.0.0-beta"
     },
+    "suggest": {
+        "cache/doctrine-adapter-bundle": "For a PSR-6 cache implementation"
+    },
     "autoload": {
         "psr-4": {
             "Happyr\\AutoFallbackTranslationBundle\\": "src/"
