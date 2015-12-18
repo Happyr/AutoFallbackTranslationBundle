@@ -50,9 +50,15 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
             return $this->symfonyTranslator->trans($id, $parameters, $domain, $locale);
         }
 
+        $locale = $catalogue->getLocale();
+        if ($locale === $this->defaultLocale) {
+            // we cant do anything...
+            return $id;
+        }
+
         $orgString = $this->symfonyTranslator->trans($id, $parameters, $domain, $this->defaultLocale);
 
-        return $this->translatorService->translate($orgString, $this->defaultLocale, $catalogue->getLocale());
+        return $this->translatorService->translate($orgString, $this->defaultLocale, $locale);
     }
 
     /**
@@ -69,9 +75,15 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
             return $this->symfonyTranslator->transChoice($id, $number, $parameters, $domain, $locale);
         }
 
+        $locale = $catalogue->getLocale();
+        if ($locale === $this->defaultLocale) {
+            // we cant do anything...
+            return $id;
+        }
+
         $orgString = $this->symfonyTranslator->transChoice($id, $number, $parameters, $domain, $this->defaultLocale);
 
-        return $this->translatorService->translate($orgString, $this->defaultLocale, $catalogue->getLocale());
+        return $this->translatorService->translate($orgString, $this->defaultLocale, $locale);
     }
 
     /**

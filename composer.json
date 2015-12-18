@@ -17,6 +17,7 @@
         "php-http/client-implementation": "1.0",
         "php-http/discovery": "~0.3",
         "php-http/plugins": "dev-master",
+        "php-http/utils": "^0.2",
         "psr/cache-implementation": "~1.0"
     },
     "require-dev": {
