@@ -39,8 +39,12 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
     /**
      * {@inheritdoc}
      */
-    public function trans($id, array $parameters = array(), $domain = null, $locale = null)
+    public function trans($id, array $parameters = array(), $domain  = null, $locale = null)
     {
+        if (!$domain) {
+            $domain = 'messages';
+        }
+
         $catalogue = $this->getCatalogue($locale);
         if ($catalogue->defines($id, $domain)) {
             return $this->symfonyTranslator->trans($id, $parameters, $domain, $locale);
@@ -48,14 +52,18 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
 
         $orgString = $this->symfonyTranslator->trans($id, $parameters, $domain, $this->defaultLocale);
 
-        return $this->translatorService->translate($orgString, $this->defaultLocale, $locale);
+        return $this->translatorService->translate($orgString, $this->defaultLocale, $catalogue->getLocale());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function transChoice($id, $number, array $parameters = array(), $domain = null, $locale = null)
+    public function transChoice($id, $number, array $parameters = array(), $domain  = null, $locale = null)
     {
+        if (!$domain) {
+            $domain = 'messages';
+        }
+
         $catalogue = $this->getCatalogue($locale);
         if ($catalogue->defines($id, $domain)) {
             return $this->symfonyTranslator->transChoice($id, $number, $parameters, $domain, $locale);
@@ -63,7 +71,8 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
 
         $orgString = $this->symfonyTranslator->transChoice($id, $number, $parameters, $domain, $this->defaultLocale);
 
-        return $this->translatorService->translate($orgString, $this->defaultLocale, $locale);    }
+        return $this->translatorService->translate($orgString, $this->defaultLocale, $catalogue->getLocale());
+    }
 
     /**
      * {@inheritdoc}

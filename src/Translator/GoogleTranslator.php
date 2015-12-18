@@ -2,13 +2,10 @@
 
 namespace Happyr\AutoFallbackTranslationBundle\Translator;
 
-use Http\Client\HttpClient;
-use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Psr\Http\Message\ResponseInterface;
 
-
-class GoogleTranslator implements TranslatorClientInterface
+class GoogleTranslator extends TranslatorClient implements TranslatorClientInterface
 {
     /**
      * @var string
@@ -16,55 +13,37 @@ class GoogleTranslator implements TranslatorClientInterface
     private $key;
 
     /**
-     * @var HttpClient
+     * @param $key
      */
-    private $httpClient;
-
-    /**
-     *
-     * @param string $key
-     * @param HttpClient $httpClient
-     */
-    public function __construct($key, HttpClient $httpClient = null)
+    public function __construct($key)
     {
         if (empty($key)) {
             throw new \InvalidArgumentException('Google key can not be empty');
         }
 
         $this->key = $key;
-        $this->httpClient = $httpClient;
     }
 
-
+    /**
+     * @param $string
+     * @param $from
+     * @param $to
+     */
     public function translate($string, $from, $to)
     {
         $url = sprintf('https://www.googleapis.com/language/translate/v2?key=%s&source=%s&target=%s&q=%s', $this->key, $from, $to, urlencode($string));
         $request = MessageFactoryDiscovery::find()->createRequest('GET', $url);
 
         /** @var ResponseInterface $response */
-        $response = $this->getHttpClient()->send($request);
+        $response = $this->getHttpClient()->sendRequest($request);
 
-        if ($response->getStatusCode()!==200) {
+        if ($response->getStatusCode() !== 200) {
             return;
         }
 
         $data = json_decode($response->getBody()->__toString(), true);
-        foreach ($data['data']['translatons'] as $translaton) {
+        foreach ($data['data']['translations'] as $translaton) {
             return $translaton['translatedText'];
         }
     }
-
-    /**
-     * @return HttpClient
-     */
-    protected function getHttpClient()
-    {
-        if ($this->httpClient === null) {
-            $this->httpClient = HttpClientDiscovery::find();
-        }
-
-        return $this->httpClient;
-    }
-
-
 }
