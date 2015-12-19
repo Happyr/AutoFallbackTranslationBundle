@@ -2,7 +2,7 @@
 
 This bundle uses Google to translate messages that you have not translated yet. So instead of using a fallback language
 you get a Google translated string. Sure, Google translate is not optimal but it is way better then using a different
-language. With this feature you can deploy a new version even before your translators has done their work. 
+language. With this feature you can deploy a new version even before your translators have done their work. 
 
 ### To Install
 
