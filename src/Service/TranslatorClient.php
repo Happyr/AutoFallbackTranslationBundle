@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\AutoFallbackTranslationBundle\Translator;
+namespace Happyr\AutoFallbackTranslationBundle\Service;
 
 use Http\Client\HttpClient;
 use Http\Client\Plugin\CachePlugin;
@@ -45,8 +45,8 @@ abstract class TranslatorClient
     /**
      * Log something.
      *
-     * @param $level
-     * @param $message
+     * @param string $level
+     * @param string $message
      */
     protected function log($level, $message)
     {

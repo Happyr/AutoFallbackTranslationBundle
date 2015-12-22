@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\AutoFallbackTranslationBundle\Translator;
+namespace Happyr\AutoFallbackTranslationBundle\Service;
 
 interface TranslatorClientInterface
 {

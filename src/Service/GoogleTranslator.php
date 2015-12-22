@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\AutoFallbackTranslationBundle\Translator;
+namespace Happyr\AutoFallbackTranslationBundle\Service;
 
 use Http\Discovery\MessageFactoryDiscovery;
 use Psr\Http\Message\ResponseInterface;

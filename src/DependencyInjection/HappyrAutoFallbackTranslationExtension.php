@@ -2,7 +2,7 @@
 
 namespace Happyr\AutoFallbackTranslationBundle\DependencyInjection;
 
-use Happyr\AutoFallbackTranslationBundle\Translator\GoogleTranslator;
+use Happyr\AutoFallbackTranslationBundle\Service\GoogleTranslator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;

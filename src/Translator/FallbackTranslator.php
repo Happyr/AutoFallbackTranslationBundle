@@ -1,8 +1,8 @@
 <?php
 
-namespace Happyr\AutoFallbackTranslationBundle\Service;
+namespace Happyr\AutoFallbackTranslationBundle\Translator;
 
-use Happyr\AutoFallbackTranslationBundle\Translator\TranslatorClientInterface;
+use Happyr\AutoFallbackTranslationBundle\Service\TranslatorClientInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -25,7 +25,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
 
     /**
      *
-     * @param $defaultLocale
+     * @param string $defaultLocale
      * @param TranslatorInterface $symfonyTranslator
      * @param TranslatorClientInterface $translatorService
      */
