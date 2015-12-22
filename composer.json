@@ -18,7 +18,8 @@
         "php-http/discovery": "~0.3",
         "php-http/plugins": "dev-master",
         "php-http/utils": "^0.2",
-        "psr/cache-implementation": "~1.0"
+        "psr/cache-implementation": "~1.0",
+        "psr/log": "1.0.0"
     },
     "require-dev": {
         "php-http/guzzle5-adapter": "dev-master",

@@ -8,6 +8,7 @@ use Http\Client\Plugin\PluginClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\StreamFactoryDiscovery;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Log\LoggerInterface;
 
 abstract class TranslatorClient
 {
@@ -22,18 +23,36 @@ abstract class TranslatorClient
     private $cachePool;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * @return HttpClient
      */
     protected function getHttpClient()
     {
         if ($this->httpClient === null) {
             $this->httpClient = new PluginClient(HttpClientDiscovery::find(), [new CachePlugin($this->cachePool, StreamFactoryDiscovery::find(), [
-                'respect_cache_headers'=>false,
-                'default_ttl'=>604800,
+                'respect_cache_headers' => false,
+                'default_ttl' => 604800,
             ])]);
         }
 
         return $this->httpClient;
+    }
+
+    /**
+     * Log something.
+     *
+     * @param $level
+     * @param $message
+     */
+    protected function log($level, $message)
+    {
+        if ($this->logger !== null) {
+            $this->logger->log($level, $message);
+        }
     }
 
     /**
@@ -60,4 +79,15 @@ abstract class TranslatorClient
         return $this;
     }
 
+    /**
+     * @param LoggerInterface $logger
+     *
+     * @return TranslatorClient
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+
+        return $this;
+    }
 }

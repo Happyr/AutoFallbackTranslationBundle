@@ -5,6 +5,7 @@ namespace Happyr\AutoFallbackTranslationBundle\DependencyInjection;
 use Happyr\AutoFallbackTranslationBundle\Translator\GoogleTranslator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
@@ -36,7 +37,9 @@ class HappyrAutoFallbackTranslationExtension extends Extension
                 throw new \RuntimeException('You must choose a translation service for AutoFallbackTranslatorBundle.');
         }
 
-        $translatorServiceDef->addMethodCall('setCachePool', [new Reference($config['cache_service'])]);
+        $translatorServiceDef
+            ->addMethodCall('setCachePool', [new Reference($config['cache_service'])])
+            ->addMethodCall('setLogger', [new Reference('logger', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)]);
 
         $container->findDefinition('happyr.translation.auto_fallback_translator')
             ->replaceArgument(0, $config['default_locale'])
