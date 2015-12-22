@@ -4,6 +4,7 @@ namespace Happyr\AutoFallbackTranslationBundle\Service;
 
 use Http\Client\HttpClient;
 use Http\Client\Plugin\CachePlugin;
+use Http\Client\Plugin\LoggerPlugin;
 use Http\Client\Plugin\PluginClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\StreamFactoryDiscovery;
@@ -33,10 +34,18 @@ abstract class TranslatorClient
     protected function getHttpClient()
     {
         if ($this->httpClient === null) {
-            $this->httpClient = new PluginClient(HttpClientDiscovery::find(), [new CachePlugin($this->cachePool, StreamFactoryDiscovery::find(), [
+            $plugins[] = new CachePlugin(
+                $this->cachePool, StreamFactoryDiscovery::find(), [
                 'respect_cache_headers' => false,
                 'default_ttl' => 604800,
-            ])]);
+            ]
+            );
+
+            if ($this->logger !== null) {
+                $plugins[] = new LoggerPlugin($this->logger);
+            }
+
+            $this->httpClient = new PluginClient(HttpClientDiscovery::find(), $plugins);
         }
 
         return $this->httpClient;
