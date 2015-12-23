@@ -13,7 +13,7 @@ class GoogleTranslator extends TranslatorClient implements TranslatorClientInter
     private $key;
 
     /**
-     * @param $key
+     * @param string $key
      */
     public function __construct($key)
     {
@@ -25,9 +25,7 @@ class GoogleTranslator extends TranslatorClient implements TranslatorClientInter
     }
 
     /**
-     * @param $string
-     * @param $from
-     * @param $to
+     * {@inheritdoc}
      */
     public function translate($string, $from, $to)
     {
@@ -58,10 +56,10 @@ class GoogleTranslator extends TranslatorClient implements TranslatorClientInter
     }
 
     /**
-     * @param $string
-     * @param $from
-     * @param $to
-     * @param $key
+     * @param string $string
+     * @param string $from
+     * @param string $to
+     * @param string $key
      *
      * @return string
      */
