@@ -58,7 +58,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
 
         $orgString = $this->symfonyTranslator->trans($id, $parameters, $domain, $this->defaultLocale);
 
-        return $this->translatorService->translate($orgString, $this->defaultLocale, $locale);
+        return $this->translateWithSubstitutedParameters($orgString, $locale, $parameters);
     }
 
     /**
@@ -83,7 +83,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
 
         $orgString = $this->symfonyTranslator->transChoice($id, $number, $parameters, $domain, $this->defaultLocale);
 
-        return $this->translatorService->translate($orgString, $this->defaultLocale, $locale);
+        return $this->translateWithSubstitutedParameters($orgString, $locale, $parameters);
     }
 
     /**
@@ -116,5 +116,26 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
     public function __call($method, $args)
     {
         return call_user_func_array(array($this->symfonyTranslator, $method), $args);
+    }
+
+    /**
+     * @param string $orgString
+     * @param string $locale you wan to translate to.
+     * @param array $parameters
+     *
+     * @return string
+     */
+    private function translateWithSubstitutedParameters($orgString, $locale, array $parameters)
+    {
+        // Replace parameters
+        $replacements = [];
+        foreach ($parameters as $placeholder => $nonTranslatableValue) {
+            $replacements[$nonTranslatableValue] = uniqid();
+        }
+
+        $orgString = str_replace(array_keys($replacements), array_values($replacements), $orgString);
+        $translatedString = $this->translatorService->translate($orgString, $this->defaultLocale, $locale);
+
+        return str_replace(array_values($replacements), array_keys($replacements), $translatedString);
     }
 }
