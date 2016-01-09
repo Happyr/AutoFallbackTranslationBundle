@@ -22,7 +22,8 @@
         "psr/log": "1.0.0"
     },
     "require-dev": {
-        "php-http/guzzle5-adapter": "dev-master",
+        "php-http/guzzle6-adapter": "dev-master",
+        "cache/array-adapter": "@stable",
         "php-http/httplug": "v1.0.0-beta"
     },
     "suggest": {
@@ -31,6 +32,11 @@
     "autoload": {
         "psr-4": {
             "Happyr\\AutoFallbackTranslationBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Happyr\\AutoFallbackTranslationBundle\\Tests\\": "tests/"
         }
     }
 }

@@ -119,7 +119,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
     }
 
     /**
-     * @param string $orgString
+     * @param string $orgString This is the string in the default locale. It has the values of $parameters in the string already.
      * @param string $locale you wan to translate to.
      * @param array $parameters
      *
@@ -130,12 +130,21 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
         // Replace parameters
         $replacements = [];
         foreach ($parameters as $placeholder => $nonTranslatableValue) {
-            $replacements[$nonTranslatableValue] = uniqid();
+            $replacements[(string) $nonTranslatableValue] = uniqid();
         }
 
-        $orgString = str_replace(array_keys($replacements), array_values($replacements), $orgString);
-        $translatedString = $this->translatorService->translate($orgString, $this->defaultLocale, $locale);
+        $replacedString = str_replace(array_keys($replacements), array_values($replacements), $orgString);
+        $translatedString = $this->getTranslatorService()->translate($replacedString, $this->defaultLocale, $locale);
 
         return str_replace(array_values($replacements), array_keys($replacements), $translatedString);
+    }
+
+    /**
+     *
+     * @return TranslatorClientInterface
+     */
+    protected function getTranslatorService()
+    {
+        return $this->translatorService;
     }
 }
