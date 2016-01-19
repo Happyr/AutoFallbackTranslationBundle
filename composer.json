@@ -17,9 +17,8 @@
         "php-http/client-implementation": "1.0",
         "php-http/discovery": "^0.3|^0.4|^0.6.4|^0.7",
         "php-http/plugins": "^0.1",
-        "php-http/utils": "^0.2",
         "psr/cache-implementation": "~1.0",
-        "psr/log": "1.0.0"
+        "psr/log": "~1.0"
     },
     "require-dev": {
         "php-http/guzzle6-adapter": "dev-master",
