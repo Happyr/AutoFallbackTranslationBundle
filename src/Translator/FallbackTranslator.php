@@ -41,6 +41,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
      */
     public function trans($id, array $parameters = array(), $domain  = null, $locale = null)
     {
+        $id = (string) $id;
         if (!$domain) {
             $domain = 'messages';
         }
@@ -66,6 +67,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
      */
     public function transChoice($id, $number, array $parameters = array(), $domain  = null, $locale = null)
     {
+        $id = (string) $id;
         if (!$domain) {
             $domain = 'messages';
         }
