@@ -39,9 +39,8 @@ This bundle has some dependencies that are not yet stable. They will be within t
 require some more dependencies in your composer.json until then. 
 
 ```json
-    "happyr/auto-fallback-translation-bundle": "dev-master",
-    "php-http/guzzle5-adapter": "dev-master",
-    "php-http/httplug": "v1.0.0-alpha3",
-    "php-http/plugins": "dev-master",
-    "cache/doctrine-adapter-bundle": "dev-master"
+    "puli/composer-plugin": "^1.0.0-beta9",
+    "puli/repository": "^1.0-beta9",
+    "puli/discovery": "^1.0-beta9",
+    "puli/url-generator": "^1.0-beta4"
 ```
