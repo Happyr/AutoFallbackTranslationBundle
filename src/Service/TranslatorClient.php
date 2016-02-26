@@ -3,12 +3,8 @@
 namespace Happyr\AutoFallbackTranslationBundle\Service;
 
 use Http\Client\HttpClient;
-use Http\Client\Plugin\CachePlugin;
-use Http\Client\Plugin\LoggerPlugin;
-use Http\Client\Plugin\PluginClient;
-use Http\Discovery\HttpClientDiscovery;
-use Http\Discovery\StreamFactoryDiscovery;
-use Psr\Cache\CacheItemPoolInterface;
+use Http\Message\MessageFactory;
+use Http\Message\StreamFactory;
 use Psr\Log\LoggerInterface;
 
 abstract class TranslatorClient
@@ -19,9 +15,9 @@ abstract class TranslatorClient
     private $httpClient;
 
     /**
-     * @var CacheItemPoolInterface
+     * @var MessageFactory
      */
-    private $cachePool;
+    private $messageFactory;
 
     /**
      * @var LoggerInterface
@@ -33,21 +29,6 @@ abstract class TranslatorClient
      */
     protected function getHttpClient()
     {
-        if ($this->httpClient === null) {
-            $plugins[] = new CachePlugin(
-                $this->cachePool, StreamFactoryDiscovery::find(), [
-                'respect_cache_headers' => false,
-                'default_ttl' => 604800,
-            ]
-            );
-
-            if ($this->logger !== null) {
-                $plugins[] = new LoggerPlugin($this->logger);
-            }
-
-            $this->httpClient = new PluginClient(HttpClientDiscovery::find(), $plugins);
-        }
-
         return $this->httpClient;
     }
 
@@ -77,18 +58,6 @@ abstract class TranslatorClient
     }
 
     /**
-     * @param CacheItemPoolInterface $cachePool
-     *
-     * @return TranslatorClient
-     */
-    public function setCachePool(CacheItemPoolInterface $cachePool)
-    {
-        $this->cachePool = $cachePool;
-
-        return $this;
-    }
-
-    /**
      * @param LoggerInterface $logger
      *
      * @return TranslatorClient
@@ -96,6 +65,26 @@ abstract class TranslatorClient
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
+
+        return $this;
+    }
+
+    /**
+     * @return MessageFactory
+     */
+    protected function getMessageFactory()
+    {
+        return $this->messageFactory;
+    }
+
+    /**
+     * @param MessageFactory $messageFactory
+     *
+     * @return TranslatorClient
+     */
+    public function setMessageFactory($messageFactory)
+    {
+        $this->messageFactory = $messageFactory;
 
         return $this;
     }

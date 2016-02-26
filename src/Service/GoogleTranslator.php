@@ -30,7 +30,7 @@ class GoogleTranslator extends TranslatorClient implements TranslatorClientInter
     public function translate($string, $from, $to)
     {
         $url = $this->getUrl($string, $from, $to, $this->key);
-        $request = MessageFactoryDiscovery::find()->createRequest('GET', $url);
+        $request = $this->getMessageFactory()->createRequest('GET', $url);
 
         /** @var ResponseInterface $response */
         $response = $this->getHttpClient()->sendRequest($request);

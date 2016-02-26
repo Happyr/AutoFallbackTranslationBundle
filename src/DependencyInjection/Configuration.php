@@ -19,7 +19,8 @@ class Configuration implements ConfigurationInterface
         $root = $treeBuilder->root('happyr_auto_fallback_translation');
 
         $root->children()
-            ->scalarNode('cache_service')->isRequired()->end()
+            ->scalarNode('http_client')->cannotBeEmpty()->defaultValue('httplug.client')->end()
+            ->scalarNode('message_factory')->cannotBeEmpty()->defaultValue('httplug.message_factory')->end()
             ->enumNode('translation_service')->values(array('google', 'foobar'))->defaultValue('google')->end()
             ->booleanNode('enabled')->defaultFalse()->end()
             ->scalarNode('default_locale')->defaultValue('en')->end()

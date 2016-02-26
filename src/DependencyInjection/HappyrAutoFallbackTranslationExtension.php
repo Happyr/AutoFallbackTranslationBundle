@@ -38,7 +38,8 @@ class HappyrAutoFallbackTranslationExtension extends Extension
         }
 
         $translatorServiceDef
-            ->addMethodCall('setCachePool', [new Reference($config['cache_service'])])
+            ->addMethodCall('setHttpClient', [new Reference($config['http_client'])])
+            ->addMethodCall('setMessageFactory', [new Reference($config['message_factory'])])
             ->addMethodCall('setLogger', [new Reference('logger', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)]);
 
         $container->findDefinition('happyr.translation.auto_fallback_translator')
