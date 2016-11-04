@@ -2,6 +2,9 @@
 
 namespace Happyr\AutoFallbackTranslationBundle\Service;
 
+/**
+ * This represent a third party translation service. Like Google, Bing etc.
+ */
 interface TranslatorService
 {
     /**

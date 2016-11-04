@@ -15,8 +15,11 @@
 
     <formatter type="clover" usefile="false"/>
     <testsuites>
-        <testsuite name="Happyr Test Suite">
-            <directory>./tests</directory>
+        <testsuite name="Functional tests">
+            <directory>./Tests/Functional</directory>
+        </testsuite>
+        <testsuite name="Unit tests">
+            <directory>./Tests/Unit</directory>
         </testsuite>
     </testsuites>
 
@@ -25,11 +28,8 @@
             <directory suffix=".php">./</directory>
             <exclude>
                 <directory>vendor</directory>
-                <directory>Test</directory>
+                <directory>Tests</directory>
             </exclude>
         </whitelist>
     </filter>
-
-    <logging>
-    </logging>
 </phpunit>

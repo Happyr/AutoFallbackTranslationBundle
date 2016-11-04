@@ -14,7 +14,7 @@ language. With this feature you can deploy a new version even before your transl
 ### To Install
 
 Run the following in your project root, assuming you have composer set up for your project
-```sh
+```bash
 composer require happyr/auto-fallback-translation-bundle
 ```
 
@@ -41,10 +41,15 @@ class AppKernel extends Kernel
 happyr_auto_fallback_translation:
     enabled: false
     default_locale: en
+    translation_service: "google"
     google_key: "%google_server_api_key%"
     http_client: httplug.client.auto_translation
+    message_factory: httplug.message_factory # default
     
  // app/config/config_prod.yml
 happyr_auto_fallback_translation:
     enabled: true # Only enabled in production
 ```
+
+To easier configure the HTTP client and message factory, have a look at 
+[HttplugBundle](https://github.com/php-http/HttplugBundle).
