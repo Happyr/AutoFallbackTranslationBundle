@@ -51,7 +51,7 @@ class GoogleTranslator extends TranslatorClient implements TranslatorClientInter
         }
 
         foreach ($data['data']['translations'] as $translaton) {
-            return $translaton['translatedText'];
+            return htmlspecialchars_decode($translaton['translatedText']);
         }
     }
 
