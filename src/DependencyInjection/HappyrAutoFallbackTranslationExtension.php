@@ -10,6 +10,9 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
+/**
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class HappyrAutoFallbackTranslationExtension extends Extension
 {
     /**
@@ -28,7 +31,7 @@ class HappyrAutoFallbackTranslationExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        switch($config['translation_service']) {
+        switch ($config['translation_service']) {
             case 'google':
                 $translatorServiceDef = $container->register('happyr.translation.auto.service', GoogleTranslator::class);
                 $translatorServiceDef->addArgument($config['google_key']);
@@ -47,5 +50,4 @@ class HappyrAutoFallbackTranslationExtension extends Extension
             ->replaceArgument(2, $translatorServiceDef)
             ->setDecoratedService('translator', null, 10);
     }
-
 }

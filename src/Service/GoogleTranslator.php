@@ -2,10 +2,12 @@
 
 namespace Happyr\AutoFallbackTranslationBundle\Service;
 
-use Http\Discovery\MessageFactoryDiscovery;
 use Psr\Http\Message\ResponseInterface;
 
-class GoogleTranslator extends TranslatorClient implements TranslatorClientInterface
+/**
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
+class GoogleTranslator extends AbstractTranslator implements TranslatorService
 {
     /**
      * @var string

@@ -2,10 +2,13 @@
 
 namespace Happyr\AutoFallbackTranslationBundle\Translator;
 
-use Happyr\AutoFallbackTranslationBundle\Service\TranslatorClientInterface;
+use Happyr\AutoFallbackTranslationBundle\Service\TranslatorService;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
 {
     /**
@@ -14,7 +17,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
     private $symfonyTranslator;
 
     /**
-     * @var TranslatorClientInterface
+     * @var TranslatorService
      */
     private $translatorService;
 
@@ -24,12 +27,11 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
     private $defaultLocale;
 
     /**
-     *
-     * @param string $defaultLocale
+     * @param string              $defaultLocale
      * @param TranslatorInterface $symfonyTranslator
-     * @param TranslatorClientInterface $translatorService
+     * @param TranslatorService   $translatorService
      */
-    public function __construct($defaultLocale, TranslatorInterface $symfonyTranslator, TranslatorClientInterface $translatorService)
+    public function __construct($defaultLocale, TranslatorInterface $symfonyTranslator, TranslatorService $translatorService)
     {
         $this->symfonyTranslator = $symfonyTranslator;
         $this->translatorService = $translatorService;
@@ -39,7 +41,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
     /**
      * {@inheritdoc}
      */
-    public function trans($id, array $parameters = array(), $domain  = null, $locale = null)
+    public function trans($id, array $parameters = array(), $domain = null, $locale = null)
     {
         $id = (string) $id;
         if (!$domain) {
@@ -65,7 +67,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
     /**
      * {@inheritdoc}
      */
-    public function transChoice($id, $number, array $parameters = array(), $domain  = null, $locale = null)
+    public function transChoice($id, $number, array $parameters = array(), $domain = null, $locale = null)
     {
         $id = (string) $id;
         if (!$domain) {
@@ -121,9 +123,9 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
     }
 
     /**
-     * @param string $orgString This is the string in the default locale. It has the values of $parameters in the string already.
-     * @param string $locale you wan to translate to.
-     * @param array $parameters
+     * @param string $orgString  This is the string in the default locale. It has the values of $parameters in the string already.
+     * @param string $locale     you wan to translate to.
+     * @param array  $parameters
      *
      * @return string
      */
@@ -142,8 +144,7 @@ class FallbackTranslator implements TranslatorInterface, TranslatorBagInterface
     }
 
     /**
-     *
-     * @return TranslatorClientInterface
+     * @return TranslatorService
      */
     protected function getTranslatorService()
     {

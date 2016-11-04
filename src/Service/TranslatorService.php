@@ -2,12 +2,12 @@
 
 namespace Happyr\AutoFallbackTranslationBundle\Service;
 
-interface TranslatorClientInterface
+interface TranslatorService
 {
     /**
      * @param string $string text to translate
-     * @param string $from from what locale
-     * @param string $to to what locale
+     * @param string $from   from what locale
+     * @param string $to     to what locale
      *
      * @return string Return the translated string
      */
