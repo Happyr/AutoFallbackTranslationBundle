@@ -1,0 +1,5 @@
+services:
+    happyr.dummy_http_client:
+        class: Happyr\AutoFallbackTranslationBundle\Tests\Functional\app\Service\DummyHttpClient
+    happyr.dummy_message_factory:
+        class: Happyr\AutoFallbackTranslationBundle\Tests\Functional\app\Service\DummyMessageFactory

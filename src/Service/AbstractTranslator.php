@@ -4,10 +4,12 @@ namespace Happyr\AutoFallbackTranslationBundle\Service;
 
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
-use Http\Message\StreamFactory;
 use Psr\Log\LoggerInterface;
 
-abstract class TranslatorClient
+/**
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
+abstract class AbstractTranslator
 {
     /**
      * @var HttpClient
@@ -48,7 +50,7 @@ abstract class TranslatorClient
     /**
      * @param HttpClient $httpClient
      *
-     * @return TranslatorClient
+     * @return AbstractTranslator
      */
     public function setHttpClient(HttpClient $httpClient)
     {
@@ -60,7 +62,7 @@ abstract class TranslatorClient
     /**
      * @param LoggerInterface $logger
      *
-     * @return TranslatorClient
+     * @return AbstractTranslator
      */
     public function setLogger(LoggerInterface $logger)
     {
@@ -80,7 +82,7 @@ abstract class TranslatorClient
     /**
      * @param MessageFactory $messageFactory
      *
-     * @return TranslatorClient
+     * @return AbstractTranslator
      */
     public function setMessageFactory($messageFactory)
     {

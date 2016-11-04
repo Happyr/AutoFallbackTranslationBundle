@@ -2,12 +2,15 @@
 
 namespace Happyr\AutoFallbackTranslationBundle\Service;
 
-interface TranslatorClientInterface
+/**
+ * This represent a third party translation service. Like Google, Bing etc.
+ */
+interface TranslatorService
 {
     /**
      * @param string $string text to translate
-     * @param string $from from what locale
-     * @param string $to to what locale
+     * @param string $from   from what locale
+     * @param string $to     to what locale
      *
      * @return string Return the translated string
      */
