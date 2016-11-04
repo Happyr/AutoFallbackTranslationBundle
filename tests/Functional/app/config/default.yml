@@ -1,0 +1,10 @@
+imports:
+    - { resource: framework.yml }
+    - { resource: services.yml }
+
+happyr_auto_fallback_translation:
+    enabled: true
+    default_locale: en
+    google_key: "foobar"
+    http_client: happyr.dummy_http_client
+    message_factory: happyr.dummy_message_factory

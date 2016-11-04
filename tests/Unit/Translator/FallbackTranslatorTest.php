@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\AutoFallbackTranslationBundle\Tests;
+namespace Happyr\AutoFallbackTranslationBundle\Tests\Unit\Translator;
 
 use Happyr\AutoFallbackTranslationBundle\Service\TranslatorService;
 use Happyr\AutoFallbackTranslationBundle\Translator\FallbackTranslator;
@@ -15,7 +15,7 @@ class FallbackTranslatorTest extends \PHPUnit_Framework_TestCase
         $method = new \ReflectionMethod(FallbackTranslator::class, 'translateWithSubstitutedParameters');
         $method->setAccessible(true);
 
-        $translator = $this->getMock(TranslatorService::class);
+        $translator = $this->getMockBuilder(TranslatorService::class)->getMock();
         $translator->method('translate')->will($this->returnArgument(0));
 
         $service = $this->getMockBuilder(FallbackTranslator::class)
