@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "php": ">=5.5",
-        "symfony/symfony":"^2.7|^3.0",
+        "php": "^5.5 || ^7.0",
+        "symfony/symfony":"^2.7 || ^3.0",
         "php-http/httplug": "^1.0",
         "php-http/client-implementation": "^1.0",
         "php-http/plugins": "^1.0",

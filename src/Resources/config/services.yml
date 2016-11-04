@@ -1,7 +1,6 @@
-parameters:
 
 services:
   happyr.translation.auto_fallback_translator:
     class: Happyr\AutoFallbackTranslationBundle\Translator\FallbackTranslator
-    arguments: [~, @happyr.translation.auto_fallback_translator.inner, ~]
+    arguments: [~, "@happyr.translation.auto_fallback_translator.inner", ~]
 
