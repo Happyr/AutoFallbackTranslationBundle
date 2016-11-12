@@ -53,7 +53,7 @@ class GoogleTranslator extends AbstractTranslator implements TranslatorService
         }
 
         foreach ($data['data']['translations'] as $translaton) {
-            return htmlspecialchars_decode($translaton['translatedText']);
+            return $this->format($string, $translaton['translatedText']);
         }
     }
 
@@ -74,5 +74,25 @@ class GoogleTranslator extends AbstractTranslator implements TranslatorService
             $to,
             urlencode($string)
         );
+    }
+
+    /**
+     * @param $original
+     * @param $translaton
+     *
+     * @return string
+     */
+    private function format($original, $translationHtmlEncoded)
+    {
+        $translation = htmlspecialchars_decode($translationHtmlEncoded);
+
+        // if capitalized, make sure we also capitalize.
+        $firstChar = mb_substr($original, 0, 1);
+        if (mb_strtoupper($firstChar) === $firstChar) {
+            $first = mb_strtoupper(mb_substr($translation, 0, 1));
+            $translation = $first.mb_substr($translation, 1);
+        }
+
+        return $translation;
     }
 }
