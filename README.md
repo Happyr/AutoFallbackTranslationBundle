@@ -6,6 +6,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/Happyr/AutoFallbackTranslationBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/Happyr/AutoFallbackTranslationBundle)
 [![Total Downloads](https://img.shields.io/packagist/dt/happyr/auto-fallback-translation-bundle.svg?style=flat-square)](https://packagist.org/packages/happyr/auto-fallback-translation-bundle)
 
+# DEPRECATED: Use php-translation/symfony-bundle
 
 This bundle uses Google to translate messages that you have not translated yet. So instead of using a fallback language
 you get a Google translated string. Sure, Google translate is not optimal but it is way better then using a different
